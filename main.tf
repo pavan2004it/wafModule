@@ -1,5 +1,5 @@
 resource "aws_wafv2_web_acl" "rp_web_acl" {
-  name        = "rp-dev-alb-waf"
+  name        = var.waf_name
   description = "Web ACLc to attach to ALB"
   scope       = "REGIONAL"
 
@@ -26,14 +26,14 @@ resource "aws_wafv2_web_acl" "rp_web_acl" {
 
   visibility_config {
     cloudwatch_metrics_enabled = true
-    metric_name                = "rp_web_acl"
+    metric_name                = var.metric_name
     sampled_requests_enabled   = true
   }
 
 }
 
 resource "aws_wafv2_rule_group" "alb_rule_group" {
-  name        = "dev-ALB-Rule-Group"
+  name        = var.rule_group_name
   description = "dev ALB Rule Group"
   capacity    = 1500
 
@@ -58,7 +58,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "admin.dev.ringgitpay-sandbox.com"
+        search_string         = "admin.uat.ringgitpay-sandbox.com"
         text_transformation {
           priority = 0
           type     = "NONE"
@@ -85,7 +85,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "auth.dev.ringgitpay-sandbox.com"
+        search_string         = "auth.uat.ringgitpay-sandbox.com"
         text_transformation {
           priority = 0
           type     = "NONE"
@@ -112,7 +112,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "forms.kdu.dev.ringgitpay-sandbox.com"
+        search_string         = "forms.kdu.uat.ringgitpay-sandbox.com"
         text_transformation {
           priority = 0
           type     = "NONE"
