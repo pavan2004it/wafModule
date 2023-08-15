@@ -58,7 +58,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "admin.uat.ringgitpay-sandbox.com"
+        search_string         = var.portal_web_search_string
         text_transformation {
           priority = 0
           type     = "NONE"
@@ -85,7 +85,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "auth.uat.ringgitpay-sandbox.com"
+        search_string         = var.identity_search_string
         text_transformation {
           priority = 0
           type     = "NONE"
@@ -112,7 +112,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
           }
         }
         positional_constraint = "EXACTLY"
-        search_string         = "forms.kdu.uat.ringgitpay-sandbox.com"
+        search_string         = var.custom_forms_search_string
         text_transformation {
           priority = 0
           type     = "NONE"
