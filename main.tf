@@ -176,7 +176,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
   }
   rule {
     name     = "Allow-Portal-RP"
-    priority = 2
+    priority = 5
     visibility_config {
       cloudwatch_metrics_enabled = true
       metric_name                = "Allow-Portal-RP"
@@ -203,7 +203,7 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
   }
   rule {
     name     = "ALB-CDN-Rule"
-    priority = 5
+    priority = 6
     visibility_config {
       cloudwatch_metrics_enabled = true
       metric_name                = "ALB-CDN-Rule"
