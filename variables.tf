@@ -25,3 +25,17 @@ variable "portal_web_search_string" {
 variable "custom_forms_search_string" {
   type = string
 }
+
+variable "identity_rp_search_string" {
+  type = string
+}
+
+variable "forms_rp_search_string" {
+  type = string
+}
+
+variable "portal_rp_search_string" {
+  type = string
+}
+
+

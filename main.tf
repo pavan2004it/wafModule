@@ -120,60 +120,87 @@ resource "aws_wafv2_rule_group" "alb_rule_group" {
       }
     }
   }
-#  rule {
-#    name     = "Allow-ALB-Product-Api"
-#    priority = 3
-#    visibility_config {
-#      cloudwatch_metrics_enabled = true
-#      metric_name                = "Allow-ALB-Product-Api"
-#      sampled_requests_enabled   = true
-#    }
-#    action {
-#      allow {}
-#    }
-#    statement {
-#      byte_match_statement {
-#        field_to_match {
-#          single_header {
-#            name = "host"
-#          }
-#        }
-#        positional_constraint = "EXACTLY"
-#        search_string         = "product-api.dev.ringgitpay-sandbox.com"
-#        text_transformation {
-#          priority = 0
-#          type     = "NONE"
-#        }
-#      }
-#    }
-#  }
-#  rule {
-#    name     = "Allow-ALB-Portal-Api"
-#    priority = 4
-#    visibility_config {
-#      cloudwatch_metrics_enabled = true
-#      metric_name                = "Allow-ALB-Portal-Api"
-#      sampled_requests_enabled   = true
-#    }
-#    action {
-#      allow {}
-#    }
-#    statement {
-#      byte_match_statement {
-#        field_to_match {
-#          single_header {
-#            name = "host"
-#          }
-#        }
-#        positional_constraint = "EXACTLY"
-#        search_string         = "admin-api.dev.ringgitpay-sandbox.com"
-#        text_transformation {
-#          priority = 0
-#          type     = "NONE"
-#        }
-#      }
-#    }
-#  }
+  rule {
+    name     = "Allow-ALB-Identity-RP"
+    priority = 3
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Allow-ALB-Identity-RP"
+      sampled_requests_enabled   = true
+    }
+    action {
+      allow {}
+    }
+    statement {
+      byte_match_statement {
+        field_to_match {
+          single_header {
+            name = "host"
+          }
+        }
+        positional_constraint = "EXACTLY"
+        search_string         = var.identity_rp_search_string
+        text_transformation {
+          priority = 0
+          type     = "NONE"
+        }
+      }
+    }
+  }
+  rule {
+    name     = "Allow-ALB-Forms-RP"
+    priority = 4
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Allow-ALB-Forms-RP"
+      sampled_requests_enabled   = true
+    }
+    action {
+      allow {}
+    }
+    statement {
+      byte_match_statement {
+        field_to_match {
+          single_header {
+            name = "host"
+          }
+        }
+        positional_constraint = "EXACTLY"
+        search_string         = var.forms_rp_search_string
+        text_transformation {
+          priority = 0
+          type     = "NONE"
+        }
+      }
+    }
+  }
+  rule {
+    name     = "Allow-Portal-RP"
+    priority = 2
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Allow-Portal-RP"
+      sampled_requests_enabled   = true
+    }
+    action {
+      allow {}
+    }
+    statement {
+      byte_match_statement {
+        field_to_match {
+          single_header {
+            name = "host"
+          }
+        }
+        positional_constraint = "EXACTLY"
+        search_string         = var.portal_rp_search_string
+        text_transformation {
+          priority = 0
+          type     = "NONE"
+        }
+      }
+    }
+  }
   rule {
     name     = "ALB-CDN-Rule"
     priority = 5
