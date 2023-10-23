@@ -38,4 +38,11 @@ variable "portal_rp_search_string" {
   type = string
 }
 
+variable "search_strings" {
+  type = list(string)
+}
+
+variable "rp_rules" {
+  type = map(string)
+}
 
