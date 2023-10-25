@@ -28,7 +28,6 @@ variable "waf_metric_name" {
 
 variable "rule_group_name" {
   type = string
-  default = "rp-sample-rg"
 }
 
 variable "waf_rules" {
